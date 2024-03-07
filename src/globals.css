@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    * {
+        @apply box-border;
+    }
+
+    
+    :root {
+        --yellow-dark: 196 127 23;
+        --yellow-light: 241 233 201;
+        --yellow: 219 172 44;
+        --purple-dark: 75 41 148;
+        --purple-light: 235 229 249;
+        --purple: 128 71 248;
+        --base-title: 39 34 33;
+        --base-subtitle: 64 57 55;
+        --base-text: 87 79 77;
+        --base-label: 141 133 133;
+        --base-hover: 215 213 213;
+        --base-button: 230 229 229;
+        --base-input: 237 237 237;
+        --base-card: 243 242 242;
+        --base-background: 250 250 250;
+    }
+}
+
+* {
+    font-family: 'Roboto';
+}
