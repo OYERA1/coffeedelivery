@@ -1,8 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-	content: ["./src/**/*.{html,js,tsx,jsx}"],
+	content: ["./src/**/*.tsx"],
 	theme: {
 		extend: {
+			gridTemplateColumns: {
+				auto: "repeat(auto-fit, minmax(256px, 1fr))",
+			},
 			fontFamily: {
 				roboto: ["Roboto"],
 				baloo: ['"Baloo 2"'],
