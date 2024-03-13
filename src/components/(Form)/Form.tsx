@@ -9,25 +9,27 @@ import {
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  TypeSchema,
-  schemaValidation,
-} from "../../../resolver/schemaValidation";
+import { TypeSchema, schemaValidation } from "../../resolver/schemaValidation";
 import FormFields from "./FormFields";
-import { ResetButton } from "../../Button";
-import CheckoutHeader from "../CheckoutHeader";
-import CheckoutCard from "../CheckoutCard";
+import { ResetButton } from "../Button";
+import CheckoutHeader from "../(Checkout)/CheckoutHeader";
+import CheckoutCard from "../(Checkout)/CheckoutCard";
+import { addCoords } from "../../_store/cart/slice";
+import { useDispatch } from "react-redux";
 
 interface ICep {
   cep: string;
-  logradouro: string;
-  bairro: string;
-  localidade: string;
-  uf: string;
+  address: string;
+  district: string;
+  city: string;
+  state: string;
+  lat: string;
+  lng: string;
   erro?: string;
 }
 
 export default function Form() {
+  const dispatch = useDispatch();
   const [disabled, setDisable] = useState<boolean>(false);
   const {
     watch,
@@ -44,20 +46,25 @@ export default function Form() {
   const fetching = async () => {
     try {
       if (cep?.length !== 9) throw new Error();
-      const cepFetched = await fetch(`https://viacep.com.br/ws/${cep}/json`, {
-        method: "GET",
-      });
+      const cepFetched = await fetch(
+        `https://cep.awesomeapi.com.br/json/${cep}`,
+        {
+          method: "GET",
+        },
+      );
       const datas: ICep = await cepFetched.json();
       if (datas) {
+        dispatch(addCoords({ latitude: datas.lat, longitude: datas.lng }));
         setError("CEP", { message: "ok" });
         setDisable(true);
-        setValue("bairro", datas.bairro);
-        setValue("cidade", datas.localidade);
-        setValue("rua", datas.logradouro);
-        setValue("uf", datas.uf);
+        setValue("rua", datas.address);
+        setValue("bairro", datas.district);
+        setValue("cidade", datas.city);
+        setValue("uf", datas.state);
       }
       if (datas.erro) throw new Error("CEP inválido");
     } catch (err) {
+      dispatch(addCoords(undefined));
       setDisable(false);
       setValue("bairro", "");
       setValue("cidade", "");
@@ -71,6 +78,7 @@ export default function Form() {
     if (cep) setValue("CEP", cep.replace(/(\d{5})(\d)/g, "$1-$2"));
 
     if (!cep || cep.length < 9) {
+      dispatch(addCoords(undefined));
       setError("CEP", { message: "ok" });
       setDisable(false);
     }
@@ -101,7 +109,7 @@ export default function Form() {
             error={errors?.CEP}
             {...register("CEP")}
           />
-          <ResetButton onClick={() => reset()} className="flex xl:col-span-2" />
+          <ResetButton onClick={() => reset()} />
           <InputField
             placeholder="Rua"
             disabled={disabled}

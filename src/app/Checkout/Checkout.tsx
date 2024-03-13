@@ -1,5 +1,5 @@
 import FinishModal from "../../components/(Checkout)/FinishModal";
-import Form from "../../components/(Checkout)/(Form)/Form";
+import Form from "../../components/(Form)/Form";
 
 export default function Checkout() {
   return (

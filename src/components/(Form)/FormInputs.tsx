@@ -49,7 +49,7 @@ export const InputPayment = forwardRef<HTMLInputElement, InputProps>(
         className="flex w-full items-center justify-center gap-3
         whitespace-nowrap rounded-md border-[1px]
         border-transparent bg-base-button p-4 text-xs 
-         uppercase text-base-text hover:bg-base-hover has-[:checked]:border-purple has-[:checked]:bg-purple-light [&>svg]:text-purple"
+         uppercase text-base-text hover:bg-base-hover has-[:checked]:border-purple has-[:checked]:bg-purple-light [&>svg]:text-purple select-none" 
       >
         {icon}
         {title}

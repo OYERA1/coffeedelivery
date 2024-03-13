@@ -1,13 +1,10 @@
-import { TItem } from "./CoffeList";
+import { toBRL } from "../../_store";
+import { AddToCartButton, QuantityButton } from "../Button";
+import { CoffeeInterface } from "../../@types/interface";
 
-export function CoffeCard({
-  item,
-  children,
-}: {
-  item: TItem;
-  children: React.ReactNode;
-}) {
-  const { description, image, tags, title } = item;
+export function CoffeCard({ item }: CoffeeInterface) {
+  const { description, image, tags, title, id, price } = item;
+
   return (
     <div
       className="
@@ -41,7 +38,16 @@ export function CoffeCard({
         </div>
       </section>
       <section className="flex w-full items-center justify-between">
-        {children}
+        <div className="flex items-center gap-1 text-base-text">
+          <p className="text-sm">R$</p>
+          <p className="font-baloo text-2xl font-extrabold">
+            {toBRL.format(price).slice(3)}
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <QuantityButton id={id} />
+          <AddToCartButton id={id} />
+        </div>
       </section>
     </div>
   );
