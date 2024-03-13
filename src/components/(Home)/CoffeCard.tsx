@@ -1,8 +1,8 @@
 import { toBRL } from "../../_store";
 import { AddToCartButton, QuantityButton } from "../Button";
-import { CoffeeInterface } from "../../@types/interface";
+import { ProductInterface } from "../../@types/interface";
 
-export function CoffeCard({ item }: CoffeeInterface) {
+export function CoffeCard({ item }: { item: ProductInterface }) {
   const { description, image, tags, title, id, price } = item;
 
   return (
