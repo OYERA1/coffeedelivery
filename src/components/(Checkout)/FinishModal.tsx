@@ -15,13 +15,15 @@ export default function FinishModal() {
     0,
   );
 
+  const initialFrete = import.meta.env.REACT_APP_REFERENCE_FRETE;
+
   const frete = ({ latitude, longitude }: AddressInterface) => {
     if (!latitude || !longitude) return 1;
 
-    const distance = getDistance(
-      { latitude: -23.516236550000002, longitude: -46.780667602091796 },
-      { latitude, longitude },
-    );
+    const distance = getDistance(initialFrete, {
+      latitude,
+      longitude,
+    });
 
     const km = convertDistance(Math.floor(distance), "km");
 
