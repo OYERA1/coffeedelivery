@@ -40,7 +40,7 @@ export default function FinishModal() {
   return (
     <div className="flex  flex-wrap space-y-3">
       <CheckoutCard>
-        <div className="flex ">
+        <div className="flex flex-col">
           {cartItems.map(
             (i) => i.qtd > 0 && <CoffeeModal key={i.id} id={i.id} />,
           )}
