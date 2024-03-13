@@ -6,6 +6,7 @@ import { HeaderCounter } from "./HeaderCounter";
 
 export default function Header() {
   const cartProducts = useAppSelector((item) => item.cart.products);
+
   const quantitySum = cartProducts.reduce(
     (total, product) => total + product.qtd,
     0,

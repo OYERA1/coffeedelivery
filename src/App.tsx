@@ -3,7 +3,8 @@ import "./globals.css";
 import Home from "./app/Home";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Checkout from "./app/Checkout/Checkout";
+import Checkout from "./app/Checkout";
+import Finish from "./app/Finish";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <Checkout />,
+      },
+      {
+        path: "/checkout/finish/",
+        element: <Finish />,
       },
     ],
   },

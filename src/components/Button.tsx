@@ -28,7 +28,7 @@ export const QuantityButton = ({ id }: { id: number }) => {
 
   return (
     <div
-      className="flex max-h-8  select-none justify-center items-center gap-1
+      className="flex h-[38px]  select-none items-center justify-center gap-1
     overflow-hidden rounded-md bg-base-button p-2 text-center hover:bg-base-hover
     "
     >

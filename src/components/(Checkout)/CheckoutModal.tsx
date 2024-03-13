@@ -2,13 +2,18 @@ import { toBRL, useAppSelector } from "../../_store";
 import { getDistance, convertDistance } from "geolib";
 import CoffeeModal from "./CoffeeModal";
 import CheckoutCard from "./CheckoutCard";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setCustomError } from "../../_store/checkout";
 
 interface AddressInterface {
   latitude: string;
   longitude: string;
 }
 
-export default function FinishModal() {
+export default function CheckoutModal() {
+  const dispatch = useDispatch();
+  const error = useAppSelector((item) => item.checkout.customError);
   const address = useAppSelector((item) => item.cart.address);
   const cartItems = useAppSelector((item) => item.cart.products);
   const totalPrice = cartItems.reduce(
@@ -37,10 +42,14 @@ export default function FinishModal() {
     return km;
   };
 
+  useEffect(() => {
+    cartItems && dispatch(setCustomError(""));
+  }, [cartItems, dispatch]);
+
   return (
-    <div className="flex  flex-wrap space-y-3">
+    <div className="flex w-full flex-wrap space-y-3">
       <CheckoutCard>
-        <div className="flex flex-col">
+        <div className="flex w-full flex-col">
           {cartItems.map(
             (i) => i.qtd > 0 && <CoffeeModal key={i.id} id={i.id} />,
           )}
@@ -67,6 +76,7 @@ export default function FinishModal() {
         >
           confirmar pedido
         </button>
+        {error && <p className="text-xs text-red-500">*{error}</p>}
       </CheckoutCard>
     </div>
   );

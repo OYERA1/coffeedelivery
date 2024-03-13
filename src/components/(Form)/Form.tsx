@@ -13,9 +13,12 @@ import { TypeSchema, schemaValidation } from "../../resolver/schemaValidation";
 import FormFields from "./FormFields";
 import { ResetButton } from "../Button";
 import CheckoutHeader from "../(Checkout)/CheckoutHeader";
-import { addCoords } from "../../_store/cart/slice";
+import { addCoords, removeFromCart } from "../../_store/cart/slice";
 import { useDispatch } from "react-redux";
 import FormCard from "./FormCard";
+import { useAppSelector } from "../../_store";
+import { onSubmitAction, setCustomError } from "../../_store/checkout";
+import { useNavigate } from "react-router-dom";
 
 interface ICep {
   cep: string;
@@ -30,6 +33,7 @@ interface ICep {
 
 export default function Form() {
   const dispatch = useDispatch();
+  const items = useAppSelector((item) => item.cart.products);
   const [disabled, setDisable] = useState<boolean>(false);
   const {
     watch,
@@ -42,6 +46,7 @@ export default function Form() {
   } = useForm<TypeSchema>({
     resolver: zodResolver(schemaValidation),
   });
+  const route = useNavigate();
   const cep = watch("CEP");
   const fetching = async () => {
     try {
@@ -86,7 +91,20 @@ export default function Form() {
   }, [setValue, cep]);
 
   const handleSubmitForm = (data: TypeSchema) => {
-    console.log(data);
+    if (!items.length) {
+      return dispatch(setCustomError("Adicione itens ao carrinho"));
+    }
+    const formData = {
+      address: data,
+      items: items,
+      paymentMethod: data.paymentMethod,
+      customError: "",
+    };
+    dispatch(onSubmitAction(formData));
+    for (const item of items) {
+      dispatch(removeFromCart(item.id));
+    }
+    route("/checkout/finish");
   };
 
   return (
@@ -168,21 +186,21 @@ export default function Form() {
             icon={<CreditCard size={16} />}
             title="Cartão de crédito"
             id="credit"
-            value="credit"
+            value="Cartão de Crédito"
           />
           <InputPayment
             {...register("paymentMethod")}
             icon={<Bank size={16} />}
             title="cartão de débito"
             id="debit"
-            value="debit"
+            value="Cartão de Débito"
           />
           <InputPayment
             {...register("paymentMethod")}
             icon={<Money size={16} />}
             title="dinheiro"
             id="money"
-            value="money"
+            value="Dinheiro"
           />
         </FormFields>
       </FormCard>

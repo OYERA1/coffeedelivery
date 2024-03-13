@@ -1,4 +1,4 @@
-import FinishModal from "../../components/(Checkout)/FinishModal";
+import FinishModal from "../../components/(Checkout)/CheckoutModal";
 import Form from "../../components/(Form)/Form";
 
 export default function Checkout() {
@@ -10,7 +10,10 @@ export default function Checkout() {
         </p>
         <Form />
       </aside>
-      <aside className="flex flex-col gap-y-4">
+      <aside
+        className="flex w-full max-w-[640px] flex-col gap-y-4
+xl:w-[448px]"
+      >
         <p className="font-baloo text-lg font-bold leading-[130%] text-base-subtitle">
           Cafés selecionados
         </p>

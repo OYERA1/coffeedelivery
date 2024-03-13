@@ -1,15 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { coffees } from "../../../data.json";
-
-interface ProductInterface {
-	id: number;
-	title: string;
-	description: string;
-	tags: string[];
-	price: number;
-	image: string;
-	qtd: number;
-}
+import { ProductInterface } from "../../@types/interface";
 
 interface CartStateInterface {
 	products: ProductInterface[];
@@ -78,7 +69,10 @@ export const cartSlice = createSlice({
 		},
 
 		removeFromCart: (state, action) => {
+			console.log(action.payload);
+			const index = state.products.findIndex((i) => i.id === action.payload);
 			state.products = state.products.filter((i) => i.id !== action.payload);
+			state.coffees[index] = { ...state.coffees[index], qtd: 0 };
 		},
 
 		addCoords: (state, action) => {

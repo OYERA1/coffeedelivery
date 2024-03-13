@@ -1,11 +1,9 @@
-export interface CoffeeInterface {
-	item: {
-		description: string;
-		image: string;
-		tags: string[];
-		title: string;
-		id: number;
-		price: number;
-		qtd: number;
-	};
+export interface ProductInterface {
+	id: number;
+	title: string;
+	description: string;
+	tags: string[];
+	price: number;
+	image: string;
+	qtd: number;
 }

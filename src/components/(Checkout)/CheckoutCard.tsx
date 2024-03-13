@@ -5,8 +5,8 @@ export default function CheckoutCard({
 }) {
   return (
     <section
-      className="flex w-full max-w-[640px]
-    flex-col flex-wrap gap-6 rounded-md rounded-bl-[44px] rounded-tr-[44px] bg-base-card p-10 xl:max-w-max"
+      className="flex w-full 
+    flex-col gap-6 rounded-md rounded-bl-[44px] rounded-tr-[44px] bg-base-card p-10 "
     >
       {children}
     </section>

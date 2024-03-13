@@ -41,3 +41,6 @@ input::-webkit-inner-spin-button{
   appearance: none;
 }
 
+::-webkit-scrollbar {
+  width: 0;
+}
