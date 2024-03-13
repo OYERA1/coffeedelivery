@@ -19,8 +19,8 @@ export default function FinishModal() {
     if (!latitude || !longitude) return 1;
     const distance = getDistance(
       {
-        latitude: import.meta.env.VITE_LATITUDE_REFERENCE,
-        longitude: import.meta.env.VITE_LONGITUDE_REFERENCE,
+        latitude: Number(import.meta.env.VITE_LATITUDE_REFERENCE),
+        longitude: Number(import.meta.env.VITE_LONGITUDE_REFERENCE),
       },
       {
         latitude,
