@@ -13,9 +13,9 @@ import { TypeSchema, schemaValidation } from "../../resolver/schemaValidation";
 import FormFields from "./FormFields";
 import { ResetButton } from "../Button";
 import CheckoutHeader from "../(Checkout)/CheckoutHeader";
-import CheckoutCard from "../(Checkout)/CheckoutCard";
 import { addCoords } from "../../_store/cart/slice";
 import { useDispatch } from "react-redux";
+import FormCard from "./FormCard";
 
 interface ICep {
   cep: string;
@@ -53,9 +53,7 @@ export default function Form() {
         },
       );
       const datas: ICep = await cepFetched.json();
-      console.log(datas)
       if (datas) {
-        console.log(datas.lat, datas.lng)
         dispatch(addCoords({ latitude: datas.lat, longitude: datas.lng }));
         setError("CEP", { message: "ok" });
         setDisable(true);
@@ -95,9 +93,9 @@ export default function Form() {
     <form
       id="teste"
       onSubmit={handleSubmit((data) => handleSubmitForm(data))}
-      className="flex flex-wrap space-y-3"
+      className="flex w-full flex-wrap space-y-3"
     >
-      <CheckoutCard>
+      <FormCard>
         <CheckoutHeader
           title="Endereço de Entrega"
           description="Informe o endereço onde deseja receber seu pedido"
@@ -157,8 +155,8 @@ export default function Form() {
             className="col-span row-span-[4/4] "
           />
         </FormFields>
-      </CheckoutCard>
-      <CheckoutCard>
+      </FormCard>
+      <FormCard>
         <CheckoutHeader
           title="Pagamento"
           description="O pagamento é feito na entrega. Escolha a forma que deseja pagar"
@@ -187,7 +185,7 @@ export default function Form() {
             value="money"
           />
         </FormFields>
-      </CheckoutCard>
+      </FormCard>
     </form>
   );
 }

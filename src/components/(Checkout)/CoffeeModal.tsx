@@ -2,7 +2,7 @@ import { toBRL, useAppSelector } from "../../_store";
 import { ButtonRemove, QuantityButton } from "../Button";
 
 interface ICoffeeModal {
-  id: number;
+  id?: number;
 }
 
 export default function CoffeeModal({ id }: ICoffeeModal) {
@@ -11,7 +11,14 @@ export default function CoffeeModal({ id }: ICoffeeModal) {
   );
 
   if (!items) {
-    return;
+    return (
+      <div
+        className="flex h-max w-full flex-col items-center
+      justify-center gap-5 border-b-[1px] border-base-button p-2 py-6 first:pt-0 last:mb-6 lg:flex-row"
+      >
+        <p>Produto não encontrado</p>
+      </div>
+    );
   }
   return (
     <div
