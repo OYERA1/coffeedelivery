@@ -53,7 +53,9 @@ export default function Form() {
         },
       );
       const datas: ICep = await cepFetched.json();
+      console.log(datas)
       if (datas) {
+        console.log(datas.lat, datas.lng)
         dispatch(addCoords({ latitude: datas.lat, longitude: datas.lng }));
         setError("CEP", { message: "ok" });
         setDisable(true);

@@ -82,12 +82,13 @@ export const cartSlice = createSlice({
 		},
 
 		addCoords: (state, action) => {
+			console.log(action);
 			if (action.payload) {
 				state.address = {
 					latitude: action.payload.latitude,
 					longitude: action.payload.longitude,
 				};
-				return
+				return;
 			}
 			state.address = { latitude: "", longitude: "" };
 		},
