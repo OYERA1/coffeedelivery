@@ -14,13 +14,16 @@ export default function FinishModal() {
     (total, product) => total + product.qtd * product.price,
     0,
   );
+  const lat = import.meta.env.VITE_VERCEL_LATITUDE_REFERENCE;
+  const lng = import.meta.env.VITE_VERCEL_LONGITUDE_REFERENCE;
 
+  console.log(lat, lng);
   const frete = ({ latitude, longitude }: AddressInterface) => {
     if (!latitude || !longitude) return 1;
     const distance = getDistance(
       {
-        latitude: import.meta.env.VITE_VERCEL_LATITUDE_REFERENCE,
-        longitude: import.meta.env.VITE_VERCEL_LONGITUDE_REFERENCE,
+        latitude: lat,
+        longitude: lng,
       },
       {
         latitude,
