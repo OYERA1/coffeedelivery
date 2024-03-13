@@ -2,7 +2,7 @@ import { toBRL, useAppSelector } from "../../_store";
 import { ButtonRemove, QuantityButton } from "../Button";
 
 interface ICoffeeModal {
-  id: number
+  id: number;
 }
 
 export default function CoffeeModal({ id }: ICoffeeModal) {
@@ -14,14 +14,19 @@ export default function CoffeeModal({ id }: ICoffeeModal) {
     return;
   }
   return (
-    <div className="flex items-center gap-5 border-b-[1px] border-base-button p-2 py-6 first:pt-0 last:mb-6">
+    <div
+      className="flex h-max w-full flex-col items-center justify-center
+     gap-5 border-b-[1px] border-base-button p-2 py-6 first:pt-0 last:mb-6 lg:flex-row"
+    >
       <img src={items.image} alt={items.title} className="size-16" />
-      <div className="flex flex-col items-start  gap-5">
-        <div className="flex gap-5">
-          <p>{items.title}</p>
-          <p> {toBRL.format(items.price * items.qtd)}</p>
+      <div className="flex w-full flex-col  items-center gap-2 lg:items-start">
+        <div className="flex w-full  flex-col items-center justify-between text-base-subtitle lg:flex-row">
+          <p className="flex-1">{items.title}</p>
+          <p className="text-base font-bold">
+            {toBRL.format(items.price * items.qtd)}
+          </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-col gap-3 lg:flex-row">
           <QuantityButton id={items.id} />
           <ButtonRemove id={items.id} />
         </div>

@@ -36,7 +36,7 @@ export default function FinishModal() {
 
   return (
     <section className="flex w-full flex-col gap-6 rounded-md rounded-bl-[44px] rounded-tr-[44px] bg-base-card p-10">
-      <div className="w-max">
+      <div className="flex">
         {cartItems.map(
           (i) => i.qtd > 0 && <CoffeeModal key={i.id} id={i.id} />,
         )}

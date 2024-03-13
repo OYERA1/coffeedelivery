@@ -27,7 +27,11 @@ export const QuantityButton = ({ id }: { id: number }) => {
   );
 
   return (
-    <div className="flex w-full items-center gap-1 rounded-md bg-base-button p-2 hover:bg-base-hover select-none">
+    <div
+      className="flex max-h-8  select-none justify-center items-center gap-1
+    overflow-hidden rounded-md bg-base-button p-2 text-center hover:bg-base-hover
+    "
+    >
       <Minus
         onClick={() =>
           dispatch(decreaseQuantity({ id, type: location.pathname }))
@@ -38,7 +42,7 @@ export const QuantityButton = ({ id }: { id: number }) => {
         size={14}
       />
 
-      <p className="w-5 text-center text-base leading-5">
+      <p className="text-base leading-[20px] text-base-subtitle">
         {location.pathname === "/checkout" ? cart?.qtd || 0 : coffee?.qtd || 0}
       </p>
       <Plus
@@ -78,9 +82,7 @@ export const ButtonRemove = ({ id }: { id: number }) => {
       onClick={() => dispatch(removeFromCart(id))}
     >
       <Trash size={16} className="text-purple" weight="bold" />
-      <p className="text-xs font-medium uppercase text-base-subtitle">
-        remover
-      </p>
+      <p className="text-xs  uppercase text-base-subtitle">remover</p>
     </button>
   );
 };
